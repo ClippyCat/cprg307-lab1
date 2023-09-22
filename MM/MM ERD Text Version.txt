@@ -1,0 +1,53 @@
+More Movies
+Physical Model
+
+Tables List
+mm_movie_type
+mm_pay_type
+mm_member
+mm_movie
+mm_rental
+
+Column Details
+mm_movie_type(table)
+movie_cat_id (PK)   NUMBER(2)
+movie_category VARCHAR(12)
+
+mm_pay_type(table)
+payment_methods_id (PK)  NUMBER(2)
+payment_methods     VARCHAR(14)
+
+mm_member(table)
+member_id (PK)  NUMBER(4)
+last         VARCHAR(12)
+first        VARCHAR(8)
+license_no   VARCHAR(9)
+license_st   VARCHAR(2)
+credit_card (CK) VARCHAR(12)
+suspension   VARCHAR(1) DEFAULT 'N'
+mailing_list VARCHAR(1)
+*CK Details For CREDIT_CARD table: LENGTH(credit_card) = 12
+
+mm_movie(table)
+movie_id  (PK)   NUMBER(4)
+movie_title  VARCHAR(40)
+movie_cat_id (FK)(NN)  NUMBER(2)
+movie_value  (CK)  DECIMAL(5,2)
+movie_qty NUMBER(2)
+*CK Details For MOVIE_VALUE table: movie_value BETWEEN 5 and 100
+
+mm_rental(table)
+rental_id (PK)  NUMBER(4)
+member_id (FK1)  NUMBER(4)
+movie_id  (FK2)   NUMBER(4)
+checkout_date DATE DEFAULT SYSDATE
+checkin_date  DATE
+payment_methods_id (FK3)  NUMBER(2)
+	   
+
+
+Relationship Details:
+1:m relationship between MM_MOVIE_TYPE and MM_MOVIE with the many side being on MM_MOVIE.
+1:m relationship between MM_MEMBER and MM_RENTAL with the many side being on MM_RENTAL.
+1:m relationship between MM_MOVIE and MM_RENTAL with the many side being on MM_RENTAL.
+1:m relationship between MM_PAY_TYPE and MM_RENTAL with the many side being on MM_RENTAL.
