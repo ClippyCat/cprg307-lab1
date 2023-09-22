@@ -83,12 +83,9 @@ WITH READ ONLY;
 
 -- 17: Using the VW_MOVIE_RENTAL view in Step 14, change the last name of the member who rented the movie with the ID of 2 to "Tangier 1."
 -- 17: Using the VW_MOVIE_RENTAL view in Step 16, change the last name of the member who rented the movie with the ID of 2 to "Tangier 1."
-UPDATE mm_member
+UPDATE VW_MOVIE_RENTAL
 SET last = 'Tangier 1'
-WHERE member_id IN (
-    SELECT mm_member.member_id
-    FROM VW_MOVIE_RENTAL
-    WHERE rental_id = 2
-);
+    WHERE rental_id = 2;
+
 
 SPOOL OFF

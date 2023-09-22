@@ -122,7 +122,7 @@ SQL> SELECT last_number, increment_by
 
 LAST_NUMBER INCREMENT_BY                                                                                                
 ----------- ------------                                                                                                
-        230            5                                                                                                
+        440            5                                                                                                
 
 SQL> 
 SQL> -- 11: Display the next sequence number on the screen.
@@ -130,7 +130,7 @@ SQL> SELECT seq_movie_id.NEXTVAL FROM DUAL;
 
    NEXTVAL                                                                                                              
 ----------                                                                                                              
-       230                                                                                                              
+       440                                                                                                              
 
 SQL> 
 SQL> -- 12: Change the sequence created in Step 9 to increment by 5 instead of 2.
@@ -193,15 +193,15 @@ View created.
 SQL> 
 SQL> -- 17: Using the VW_MOVIE_RENTAL view in Step 14, change the last name of the member who rented the movie with the ID of 2 to "Tangier 1."
 SQL> -- 17: Using the VW_MOVIE_RENTAL view in Step 16, change the last name of the member who rented the movie with the ID of 2 to "Tangier 1."
-SQL> UPDATE mm_member
+SQL> UPDATE VW_MOVIE_RENTAL
   2  SET last = 'Tangier 1'
-  3  WHERE member_id IN (
-  4  	 SELECT mm_member.member_id
-  5  	 FROM VW_MOVIE_RENTAL
-  6  	 WHERE rental_id = 2
-  7  );
+  3  	 WHERE rental_id = 2;
+SET last = 'Tangier 1'
+    *
+ERROR at line 2:
+ORA-42399: cannot perform a DML operation on a read-only view 
 
-5 rows updated.
 
+SQL> 
 SQL> 
 SQL> SPOOL OFF
