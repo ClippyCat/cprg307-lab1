@@ -73,4 +73,22 @@ JOIN mm_member ON mm_rental.member_id = mm_member.member_id;
 -- 15: Use a query to display the data accessed by the VW_MOVIE_RENTAL view.
 SELECT * FROM VW_MOVIE_RENTAL;
 
+-- 16: Make the VW_MOVIE_RENTAL view read-only.
+CREATE OR REPLACE VIEW VW_MOVIE_RENTAL AS
+SELECT mm_movie.movie_title, mm_rental.rental_id, mm_member.last
+FROM mm_movie
+JOIN mm_rental ON mm_movie.movie_id = mm_rental.movie_id
+JOIN mm_member ON mm_rental.member_id = mm_member.member_id
+WITH READ ONLY;
+
+-- 17: Using the VW_MOVIE_RENTAL view in Step 14, change the last name of the member who rented the movie with the ID of 2 to "Tangier 1."
+-- 17: Using the VW_MOVIE_RENTAL view in Step 16, change the last name of the member who rented the movie with the ID of 2 to "Tangier 1."
+UPDATE mm_member
+SET last = 'Tangier 1'
+WHERE member_id IN (
+    SELECT mm_member.member_id
+    FROM VW_MOVIE_RENTAL
+    WHERE rental_id = 2
+);
+
 SPOOL OFF
