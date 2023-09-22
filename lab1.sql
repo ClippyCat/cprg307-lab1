@@ -1,7 +1,7 @@
 SET LINESIZE 120
 SET PAGESIZE 80
 SET ECHO ON
-SPOOL "C:\Users\Melody\Desktop\sad++\3\db2\lab1 Output.out"
+SPOOL "C:\Users\Melody\Desktop\sad++\3\db2\lab1\Output.out"
 
 -- 1: Display the structure of the MM_MEMBER table.
 DESCRIBE mm_member;
